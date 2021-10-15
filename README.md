@@ -1,4 +1,4 @@
-# CreatorWhitelists
+# Creator Application Whitelists
 
 
 ## Introduction
