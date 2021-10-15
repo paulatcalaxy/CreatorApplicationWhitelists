@@ -25,6 +25,10 @@ Each entry in the list stores a name and TLD URL for an application
 		    name: "Shopify",
 		    URL: "www.shopify.com"
 	    },
+	    {
+		    name: "AppB",
+		    URL: "www.appb.com"
+	    },
     ]
 
 
@@ -36,7 +40,7 @@ The social token's memo field will be used to point to the appropriate applicati
 
 The sequence by which an application whitelist is resolved is Query Token -> Determine DID from memo -> Resolve DID into DID Document -> Determine application whitelist file identifier -> Retrieve application whitelist JSON
 
-While the DID model introduces an extra lookup, it provides a flexible integration point for the future. As an example, we can leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist.
+While the DID model introduces an extra lookup, it provides a flexible integration point for the future. As an example, we can leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist. Additinally, the DID model allows for the application whitelist to be stored 
 
 ### DID Document Schema
 
@@ -46,12 +50,13 @@ We will extend the schema with a service endpoint of type 'CalaxyApplicationWhit
 
     {
       "service": [{
-        "id":"did:example:123#application-whitelist",
+        "id":"did:hedera:mainnet:123sjgjhdfughdiufg#application-whitelist",
         "type": "CalaxyApplicationWhitelist", 
         "serviceEndpoint": "0.0.12345"
       }]
     }
 
-## Security Considerations
+The serviceEndpoint carries the Hedera File identifier of the application whitelist.
 
+## Security Considerations
 
