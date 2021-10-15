@@ -20,12 +20,12 @@ The application whitelist is a JSON file listing the application's that have bee
 Each entry in the list stores a name and TLD URL for an application
 
 
->[
->	{
->		name: "Shopify",
->		URL: "www.shopify.com"
->	},
->]
+    [
+	    {
+		    name: "Shopify",
+		    URL: "www.shopify.com"
+	    },
+    ]
 
 
 ### Binding Whitelist to Creator
