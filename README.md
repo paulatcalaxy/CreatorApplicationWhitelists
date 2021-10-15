@@ -11,7 +11,9 @@ Importantly, it must be possible for an application to be removed from a Creator
 
 ## Specification
 
-A Creator's 'application whitelist' will manifest as a file on Hedera's file service. It is by creating and updating this file that a Creator will manage their application whitelist.
+A Creator's 'application whitelist' will manifest as a JSON file on Hedera's file service. It is by creating and updating this file that a Creator will manage their application whitelist.
+
+
 
 ### Application Whitelist Schema 
 
@@ -31,12 +33,13 @@ Each entry in the list stores a name and TLD URL for an application
 	    },
     ]
 
+The order of entries in the list is not material.
 
 ### Binding Whitelist to Creator
 
-It must be possible to establish that an application whitelist (with a given Hedera File identifier) is associated with a particular Creator (as identified by their social token's token identifier). 
+It must be possible to establish that a given application whitelist (with a given Hedera File identifier) is associated with a particular Creator (as identified by their social token's token identifier). If not, a malicious application could direct a Fan to a fake application whitelist with its own name on the list - fooling the Fan into thinking the application was valid and approved by the Creator when in fact it wasn't.
 
-The social token's memo field will be used to point to the appropriate application whitelist. Rather than directly specifying the file identifier within the memo field, the memo filed will contain a Decentralized Identifier (DID) that itself 'points' to a JSON DID Document stored off chain. The DID Document will contain the File identifier of the application whitelist.
+The Creator's social token's memo field will be used to point to the appropriate application whitelist. Rather than directly specifying the file identifier within the memo field, the memo field will contain a Decentralized Identifier (DID) that itself 'points' to a JSON DID Document stored off chain (in an HCS appnet run by participants in the Creator's Galaxy). The DID Document will contain the File identifier of the application whitelist.
 
 The sequence by which an application whitelist is resolved is Query Token -> Determine DID from memo -> Resolve DID into DID Document -> Determine application whitelist file identifier -> Retrieve application whitelist JSON
 
@@ -58,5 +61,10 @@ We will extend the schema with a service endpoint of type 'CalaxyApplicationWhit
 
 The serviceEndpoint carries the Hedera File identifier of the application whitelist.
 
+## Open Issues
+
+How does an application prove it is on a Creator's application whitelist other than giving a Fan the ability to view the whitelist and manually compare the entries to the application's own TLD? Might the application whitelist contain DIDs , and the applications would demonstrate ownerhip of their own DID?
+
 ## Security Considerations
 
+??
