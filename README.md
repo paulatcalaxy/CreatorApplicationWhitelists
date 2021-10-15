@@ -34,7 +34,24 @@ It must be possible to establish that an application whitelist (with a given Hed
 
 The social token's memo field will be used to point to the appropriate application whitelist. Rather than directly specifying the file identifier within the memo field, the memo filed will contain a Decentralized Identifier (DID) that itself 'points' to a JSON DID Document stored off chain. The DID Document will contain the File identifier of the application whitelist.
 
-The sequence is Query Token -> Determine DID -> Resolve DID into DID Document -> Determine application whitelist file identifier -> Retrieve application whitelist JSON
+The sequence by which an application whitelist is resolved is Query Token -> Determine DID from memo -> Resolve DID into DID Document -> Determine application whitelist file identifier -> Retrieve application whitelist JSON
 
 While the DID model introduces an extra lookup, it provides a flexible integration point for the future. As an example, we can leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist.
+
+### DID Document Schema
+
+A DID document contains a set of service endpoints. 
+
+We will extend the schema with a service endpoint of type 'CalaxyApplicationWhitelist'
+
+    {
+      "service": [{
+        "id":"did:example:123#application-whitelist",
+        "type": "CalaxyApplicationWhitelist", 
+        "serviceEndpoint": "0.0.12345"
+      }]
+    }
+
+## Security Considerations
+
 
