@@ -46,7 +46,11 @@ The Creator's social token's memo field will be used to point to the appropriate
 The sequence by which an application whitelist is resolved is as follows
 
 ```
-Query Token -> Determine DID from memo -> Resolve DID into DID Document -> Determine application whitelist file identifier -> Retrieve application whitelist JSON
+Query Token -> 
+     Determine DID from memo -> 
+           Resolve DID into DID Document -> 
+	         Determine application whitelist file identifier -> 
+		        Retrieve application whitelist JSON
 ```
 
 While the DID model introduces an extra lookup, it provides a flexible integration point for the future. As an example, we can leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist. Additinally, the DID model allows for the location of the application whitelist to be changed to other than in Hedera's file service, eg IPFS without editing the token itself.
