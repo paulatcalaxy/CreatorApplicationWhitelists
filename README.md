@@ -9,9 +9,11 @@ One mechanism for giving Fans this confidence is to allow each Creator to manage
 
 Importantly, it must be possible for an application to be removed from a Creator's whitelist when appropriate - as determined by the Creator.
 
+Each Creator will have their own Application Whitelist with potentially a unique list of approved applications - though there is likely to be much overlap.
+
 ## Specification
 
-A Creator's 'application whitelist' will manifest as a JSON file on Hedera's file service. It is by creating and updating this file that a Creator will manage their application whitelist.
+A Creator's 'application whitelist' will manifest as a JSON file on Hedera's file service. It is by creating and updating this file that a Creator will manage their application whitelist. If an application is listed in a Creator's whitelist, then Fans can interpret that to mean that the application is approved to sell assets or services of the Creator.
 
 It is by viewing the contents of this file (or otherwise be presented with some UI indicator of an application being there listed) that Fans will be able to determine the authenticity of applications.
 
@@ -41,19 +43,23 @@ The order of entries in the list is not material.
 
 It must be possible to establish that a given application whitelist (with a given Hedera File identifier) is associated with a particular Creator (as identified by their social token's token identifier). If not, a malicious application could direct a Fan to a fake application whitelist with its own name on the list - fooling the Fan into thinking the application was valid and approved by the Creator when in fact it wasn't.
 
-The Creator's social token's memo field will be used to point to the appropriate application whitelist. Rather than directly specifying the file identifier within the memo field, the memo field will contain a Decentralized Identifier (DID) that itself 'points' to a JSON DID Document stored off chain (in an HCS appnet run by participants in the Creator's Galaxy). The DID Document will contain the File identifier of the application whitelist.
+The Creator's social token's memo field will be used to point to the appropriate application whitelist. 
+
+Rather than directly specifying the file identifier within the memo field, the memo field will contain a Decentralized Identifier (DID) that itself 'points' to a JSON DID Document stored off chain (in an HCS appnet run by participants in the Creator's Galaxy). The DID Document will contain the File identifier of the application whitelist.
 
 The sequence by which an application whitelist is resolved is as follows
 
 ```
 Query Token -> 
-     Determine DID from memo -> 
+     Determine DID from memo field -> 
            Resolve DID into DID Document -> 
 	         Determine application whitelist file identifier -> 
 		        Retrieve application whitelist JSON
 ```
 
-While the DID model introduces an extra lookup, it provides a flexible integration point for the future. As an example, we can leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist. Additinally, the DID model allows for the location of the application whitelist to be changed to other than in Hedera's file service, eg IPFS without editing the token itself.
+While the DID model introduces an extra lookup, it provides a flexible integration point for the future. 
+
+As an example, we can in the future leverage the DID mechanism to bind a Verifiable Credential issued to the Creator to the social token in the same manner as for this application whitelist. Additinally, the DID model allows for the location of the application whitelist to be changed to other than Hedera's file service, eg IPFS, without editing the token itself.
 
 ### DID Document Schema
 
